@@ -1,0 +1,11 @@
+= Dynamic client registration
+
+== Dynamic client registration request
+
+.client registration meta data
+[source,json]
+----
+{
+   "redirect_uris": [ "url1", "url2"],
+}
+----
