@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-type ClientTepe int
+type ClientType int
 
 const (
 	Confidential ClientType = iota
@@ -29,8 +29,6 @@ func ClientTypeValueOf(val string) ClientType {
 	return clientType
 }
 
-type ClientIdType uuid.UUID
-
 type Scope string
 
 type CodeType struct {
@@ -41,7 +39,7 @@ type ClientType int
 
 type Client struct {
 	clientType           ClientType
-	id                   ClientIdType
+	id                   uuid.UUID
 	secret               password.Password
 	redirect_uris        []url.URL // the URL MAY not contain a fragment and is required and MAY be more than on
 	default_redirect_uri url.URL   // use when request does not contain redirect_uri
@@ -79,7 +77,7 @@ type ClientMetadata struct {
 type SecondsSinds int64
 
 type ClientInformation struct {
-	client_id                ClientIdType
+	client_id                uuid.UUID
 	client_secret            password.Password
 	client_id_issued_at      SecondsSinds
 	client_secret_expires_at SecondsSinds
