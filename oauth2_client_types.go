@@ -1,4 +1,4 @@
-package client
+package oauth2client
 
 type ClientType int
 

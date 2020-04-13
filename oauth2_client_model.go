@@ -1,6 +1,7 @@
-package client
+package oauth2client
 
 import (
+	password "github.com/ernstvorsteveld/go-password"
 	"github.com/google/uuid"
 	"net/url"
 )
@@ -11,15 +12,17 @@ type CodeType struct {
 	code string
 }
 
-type Password struct{}
-
 type Client struct {
 	clientType           ClientType
-	id                   uuid.UUID
-	secret               Password
+	id                   *uuid.UUID
+	secret               *password.Password
 	redirect_uris        []url.URL // the URL MAY not contain a fragment and is required and MAY be more than on
-	default_redirect_uri url.URL   // use when request does not contain redirect_uri
+	default_redirect_uri *url.URL  // use when request does not contain redirect_uri
 	scopes               []Scope
+}
+
+type NewClient struct {
+	Client
 }
 
 type TokenEndpointAuthMethodType int
@@ -37,24 +40,24 @@ type ClientMetadata struct {
 	token_endpoint_auth_method TokenEndpointAuthMethodType
 	// grant_types                []GrantTypeType
 	// response_types             ResponseType
-	client_name                string
-	client_uri                 url.URL
-	logo_uri                   url.URL
-	scope                      []string
-	contacts                   []EmailAddress
-	tos_uri                    url.URL
-	policyt_uri                url.URL
-	jwks_uri                   url.URL
-	jwks                       url.URL
-	software_id                uuid.UUID
-	software_version           string
+	client_name      string
+	client_uri       url.URL
+	logo_uri         url.URL
+	scope            []string
+	contacts         []EmailAddress
+	tos_uri          url.URL
+	policyt_uri      url.URL
+	jwks_uri         url.URL
+	jwks             url.URL
+	software_id      uuid.UUID
+	software_version string
 }
 
 type SecondsSinds int64
 
 type ClientInformation struct {
-	client_id                uuid.UUID
-	client_secret            Password
+	client_id                string
+	client_secret            password.Password
 	client_id_issued_at      SecondsSinds
 	client_secret_expires_at SecondsSinds
 	client_meta_data         ClientMetadata
